@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DateTimeHandler {
+public class DateTimeExamples {
 
     //Examples of how to get date-time, date and time objects
     public static void generateObjects() {
@@ -41,7 +41,6 @@ public class DateTimeHandler {
         int day = ldt.getDayOfMonth();
         int seconds = ldt.getSecond();
     }
-
 
     /*
     Date is immutable so modifications will return objects instead of mutating the date
@@ -79,7 +78,6 @@ public class DateTimeHandler {
 
     public static void truncatingObjects() {
         LocalDateTime rightNow = LocalDateTime.now();
-
         LocalDateTime truncatedTime = rightNow.truncatedTo(ChronoUnit.SECONDS);
     }
 
@@ -102,7 +100,7 @@ public class DateTimeHandler {
         }
     }
 
-    public static void OffsettingTimeZone() {
+    public static void offsettingTimeZone() {
         ZoneOffset offset = ZoneOffset.of("+2:00");
 
         // changes offset, while keeping the same point on the timeline
