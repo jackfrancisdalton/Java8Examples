@@ -2,6 +2,7 @@ package DateTime;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Comparator;
 import java.util.List;
@@ -10,12 +11,25 @@ import java.util.stream.Collectors;
 
 public class DateTimeExamples {
 
+    public static void run() {
+        generateObjects();
+        parsingDateTimeObjects();
+        modifications();
+        temporalAdjustments();
+        modifications();
+        truncatingObjects();
+        timeZones();
+        offsettingTimeZone();
+        periods();
+        durations();
+    }
+
     //Examples of how to get date-time, date and time objects
     public static void generateObjects() {
 
         //DateTime
         LocalDateTime ldt1 = LocalDateTime.now();
-        LocalDateTime ldt2 = LocalDateTime.of(1999, Month.APRIL, 13, 24, 60, 60);
+        LocalDateTime ldt2 = LocalDateTime.of(1999, Month.APRIL, 13, 23, 59, 59);
         LocalDateTime.parse("1956-11-03T10:15:30");
 
         //Date
@@ -25,7 +39,7 @@ public class DateTimeExamples {
 
         //Time
         LocalTime lt1 = LocalTime.now();
-        LocalTime lt2 = LocalTime.of(1, 60, 60);
+        LocalTime lt2 = LocalTime.of(1, 59, 59);
         LocalTime lt3 = LocalTime.parse("10:15:30");
     }
 
@@ -37,9 +51,13 @@ public class DateTimeExamples {
         LocalDate d = ldt.toLocalDate();
         LocalTime t = ldt.toLocalTime();
 
-        Month month = ldt.getMonth();
-        int day = ldt.getDayOfMonth();
-        int seconds = ldt.getSecond();
+        System.out.println("current month: " + ldt.getMonth());
+        System.out.println("current day number: " + ldt.getDayOfMonth());
+        System.out.println("current time: "
+                + ldt.getHour() + ":"
+                + ldt.getMinute() + ":"
+                + ldt.getSecond()
+        );
     }
 
     /*
@@ -52,13 +70,9 @@ public class DateTimeExamples {
         LocalDateTime ldt = LocalDateTime.now();
         LocalDate birthday = ldt.withDayOfMonth(5).withYear(1998).toLocalDate();
         LocalDate hangover = birthday.plusDays(1);
-
-        //using ambigious plus with a chronounit paramater
         LocalDate backToWorkDay = hangover.plus(1, ChronoUnit.DAYS);
-
     }
 
-    //TODO: show what happens if it is the 31st of one month and you increase by one month, does it go to the last day of the previous?
     public static void temporalAdjustments() {
         LocalDateTime rightNow = LocalDateTime.now();
 
@@ -68,12 +82,18 @@ public class DateTimeExamples {
                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY)) //if already monday do not move
                 .with(TemporalAdjusters.next(DayOfWeek.MONDAY));
 
+        int lastDayOfMonth = rightNow.
+                with(TemporalAdjusters.lastDayOfMonth())
+                .getDayOfMonth();
 
-        LocalDateTime lastDayOfMonth = rightNow.with(TemporalAdjusters.lastDayOfMonth());
-
-        LocalDateTime lastDayOfNextMonth = rightNow
+        int lastDayOfNextMonth = rightNow
                 .plusMonths(1)
-                .with(TemporalAdjusters.lastDayOfMonth());
+                .with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth();
+
+        System.out.println(
+                "\n" + "Last day of this month: " + lastDayOfMonth + "\n" +
+                "Last day of next month: " + lastDayOfNextMonth
+        );
     }
 
     public static void truncatingObjects() {
@@ -91,17 +111,19 @@ public class DateTimeExamples {
                 .sorted(byStringValue)
                 .collect(Collectors.toList());
 
+        System.out.println("\n Time in time zones");
         print(rightNow.toString());
 
         for (String zoneId : sortedZoneIds) {
             ZoneId id = ZoneId.of(zoneId);
             ZonedDateTime zoned = ZonedDateTime.of(rightNow, id);
             print(zoned.toString());
+            print("\n");
         }
     }
 
     public static void offsettingTimeZone() {
-        ZoneOffset offset = ZoneOffset.of("+2:00");
+        ZoneOffset offset = ZoneOffset.of(String.valueOf(ZoneId.of("+02:00")));
 
         // changes offset, while keeping the same point on the timeline
         OffsetTime time = OffsetTime.now();
@@ -124,8 +146,6 @@ public class DateTimeExamples {
 
         for (int i = 0; i < 24; i++) {
             print(firstDayOfMonth.toString());
-
-            //remember that mutation returns objects, dates are immutable
             firstDayOfMonth = firstDayOfMonth.plus(oneMonthPeriod);
         }
     }
@@ -134,11 +154,9 @@ public class DateTimeExamples {
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime tomorrow = LocalDateTime.now().plusDays(1);
         Duration duration = Duration.between(today, tomorrow);
-        print(duration.toHours());
-    }
-
-    public static void chronologies() {
-        //TODO:
+        print("\n");
+        print("duration in hours between " + today + " and "
+                + tomorrow + " => " + duration.toHours());
     }
 
     //endregion

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Jack F. Dalton on 0018 18 09 2016.
  */
-public class LambdaExamples {
+public class StreamExamples {
 
     public static void run() {
 
@@ -131,16 +131,16 @@ public class LambdaExamples {
 
         //endregion
 
-        //region Comparator
+        //region Comparator =======================================================
         /*
          * Comparator has existed before java 8 but we can now take advantage
          * of it with lambda and streams. In most cases they will be used in tandom
          * with the .sorted option
          *
          * Methods :
-         * - reverse :
-         * - compare :
-         * - thenCompare :
+         * - reverse() : Reverses the order of the comparator result
+         * - compare(T t1, T t2) : Compares the elements using the comparator
+         * - thenCompare(Comparator<? super T>) : Enables chaining comparators for sub sorting
          */
 
         Comparator<Artist> byArtistAge = (a1, a2) ->
@@ -241,9 +241,7 @@ public class LambdaExamples {
         List<String> youngestArtistNames = new ArrayList<>();
         youngestArtistByGenre.forEach(
                 (g, a) -> a.ifPresent(
-                        (artist) ->  youngestArtistNames.add(artist.getName())
-                )
-        );
+                        (artist) ->  youngestArtistNames.add(artist.getName())));
         System.out.println("Names: " + youngestArtistNames);
 
         //endregion

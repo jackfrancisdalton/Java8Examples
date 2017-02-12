@@ -1,11 +1,19 @@
 
-import Misc.MiscExamples;
+import DateTime.DateTimeExamples;
+import Interface.FunctionalInterfaceExamples;
+import JavaFX.JavaFXExamples;
 import Optional.OptionalExamples;
-import Stream.LambdaExamples;
+import Parallel.ParallelismExamples;
+import Stream.StreamExamples;
 
 
 public class Main {
     public static void main(String[] args) {
-        LambdaExamples.run();
+        JavaFXExamples.run(args);
+//        StreamExamples.run();
+//        ParallelismExamples.run();
+//        OptionalExamples.run();
+//        DateTimeExamples.run();
+//        new FunctionalInterfaceExamples().print("Hello");
     }
 }

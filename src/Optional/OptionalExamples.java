@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class OptionalExamples {
 
-    public void run() {
+    public static void run() {
 
         List<Worker> list = new ArrayList<>(
                 Arrays.asList(
@@ -31,7 +31,7 @@ public class OptionalExamples {
                 .forEach(System.out::println);
     }
 
-    private class Worker {
+    private static class Worker {
         private String value;
 
         public Worker(String value) {
