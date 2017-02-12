@@ -10,13 +10,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class JavaFXExamples extends Application {
@@ -46,16 +41,11 @@ public class JavaFXExamples extends Application {
         //Configure Button information and handlers
         addButton.setText("Add Value");
         addButton.setId("#button");
-        addButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                series.getData().add(
-                        new XYChart.Data(
-                                Integer.valueOf(xValue.getText()),
-                                Integer.valueOf(yValue.getText())
-                ));
-            }
-        });
+        addButton.setOnAction(event -> series.getData().add(
+                new XYChart.Data(
+                        Integer.valueOf(xValue.getText()),
+                        Integer.valueOf(yValue.getText())
+        )));
 
         //Add all values to the scene, configure style, and display
         root.getChildren().addAll(xValue, yValue, addButton, lineChart);
