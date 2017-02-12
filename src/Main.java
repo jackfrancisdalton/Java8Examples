@@ -1,8 +1,11 @@
-import DateTime.DateTimeHandler;
-import StreamExample.LambdaHandler;
+
+import Misc.MiscExamples;
+import Optional.OptionalExamples;
+import Stream.LambdaExamples;
+
 
 public class Main {
     public static void main(String[] args) {
-        LambdaHandler.run();
+        LambdaExamples.run();
     }
 }

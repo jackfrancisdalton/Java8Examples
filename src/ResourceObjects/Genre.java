@@ -10,5 +10,5 @@ public enum Genre {
     POP,
     JAZZ,
     ELECTRO,
-    COUNTRY
+    COUNTRY,
 }
