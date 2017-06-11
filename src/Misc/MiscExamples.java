@@ -29,9 +29,10 @@ public class MiscExamples {
         System.out.println("FileRead Words");
         String filename = System.getProperty("user.dir") + "/src/Misc/lines.txt";
 
-        //Will print out all of the lines other than the one containing "not a line"
+        //Will print out all of the lines other than the one containing "not a line" in uppercase
         try(Stream<String> stream = Files.lines(Paths.get(filename))) {
             stream.filter((String s) -> !s.contains("not a line"))
+                    .map(String::toUpperCase)
                     .forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
