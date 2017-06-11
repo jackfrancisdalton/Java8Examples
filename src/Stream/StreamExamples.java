@@ -166,11 +166,11 @@ public class StreamExamples {
             new Artist("Aretha Franklin", Genre.JAZZ, LocalDate.of(1942, 3, 25)),
             new Artist("Beyoncé Knowles-Carter", Genre.POP, LocalDate.of(1981, 9, 4)),
 
-            //Test Data
+            //Data for clarification of specific functions
             new Artist("Young Jazz B", Genre.JAZZ, LocalDate.of(1992, 3, 25)),
             new Artist("Young Jazz C", Genre.JAZZ, LocalDate.of(1992, 3, 25)),
             new Artist("Young Jazz A", Genre.JAZZ, LocalDate.of(1992, 3, 25)),
-            new Artist("Young Country Artist", Genre.COUNTRY, LocalDate.of(1981, 5, 24)),
+            new Artist("Young Country Artist", Genre.COUNTRY, LocalDate.of(1991, 5, 24)),
             new Artist("ZZZZZZZZ high value name", Genre.POP, LocalDate.of(1999, 9, 9))
         );
 
